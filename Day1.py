@@ -65,19 +65,26 @@ find_expenses(input, 2020)
 # Function to add two numbers and each of a remaining list
 # and check if these add up to user assigned amount
 
+count_success = 0
 
 def add_compare3(x, y, list, match):
-
+    global count_success  # make a count to catch first isntance    
     for i in list:
-        compare = int(i[0])
-        tot = x+y+compare
-        if tot == match:
-            retval = print(str(x) + "+" + str(y) + "+"
-            + str(compare) + "=" + str(x*y*compare))
-            return(retval)
-            break
+        print(count_success)
+        if count_success < 1:
+            compare = int(i[0])
+            tot = x+y+compare
+            if tot == match:
+                count_success += 1
+                print(count_success)
+                retval = print(str(x) + "+" + str(y) + "+"
+                + str(compare) + "=" + str(x*y*compare))
+                return(retval)
+                break
+            else:
+                continue
         else:
-            continue
+            break
 
 
 # Function to compare first two entires to remaining list and
@@ -99,5 +106,7 @@ def find_expenses3(df, amount):
             final = add_compare3(startval, secondval, other_vals, amount)
 
     return(final)
+
+
 
 find_expenses3(exp_df,2020)
