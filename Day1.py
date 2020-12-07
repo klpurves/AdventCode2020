@@ -67,16 +67,15 @@ find_expenses(input, 2020)
 
 count_success = 0
 
+
 def add_compare3(x, y, list, match):
-    global count_success  # make a count to catch first isntance    
+    global count_success  # make a count to catch first instance
     for i in list:
-        print(count_success)
         if count_success < 1:
             compare = int(i[0])
             tot = x+y+compare
             if tot == match:
                 count_success += 1
-                print(count_success)
                 retval = print(str(x) + "+" + str(y) + "+"
                 + str(compare) + "=" + str(x*y*compare))
                 return(retval)
