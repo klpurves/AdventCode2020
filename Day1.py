@@ -2,6 +2,7 @@
 # Day 1
 # KLPurves
 
+# PART ONE
 # task: find the two numbers that add up to 2020. Multiply them.
 import pandas as pd
 import os
@@ -57,3 +58,5 @@ workdir = os.getcwd()
 input = pd.read_csv("{0}/day1task1input.csv".format(workdir), header=None)
 
 find_expenses(input, 2020)
+
+# PART TWO
