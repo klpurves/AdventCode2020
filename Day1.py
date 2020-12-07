@@ -55,7 +55,7 @@ find_expenses(exp_df, 2020)
 
 # do this with real input.
 workdir = os.getcwd()
-input = pd.read_csv("{0}/day1task1input.csv".format(workdir), header=None)
+input = pd.read_csv("{0}/day1input.csv".format(workdir), header=None)
 
 find_expenses(input, 2020)
 
@@ -107,5 +107,4 @@ def find_expenses3(df, amount):
     return(final)
 
 
-
-find_expenses3(exp_df,2020)
+find_expenses3(input,2020)
