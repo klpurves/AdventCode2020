@@ -8,7 +8,7 @@ import pandas as pd
 import os
 
 # example from site to develop simplest version of function
-dtest = {'Expenses': [1720, 979, 366, 299, 1721, 1456]}
+dtest = {'Expenses': [1721, 979, 366, 299, 675, 1456]}
 exp_df = pd.DataFrame(data=dtest)
 
 """Function that 1. takes the number in the first row and adds it to each
@@ -60,3 +60,44 @@ input = pd.read_csv("{0}/day1task1input.csv".format(workdir), header=None)
 find_expenses(input, 2020)
 
 # PART TWO
+# task: find the three numbers that add up to 2020. Multiply them.
+
+# Function to add two numbers and each of a remaining list
+# and check if these add up to user assigned amount
+
+
+def add_compare3(x, y, list, match):
+
+    for i in list:
+        compare = int(i[0])
+        tot = x+y+compare
+        if tot == match:
+            retval = print(str(x) + "+" + str(y) + "+"
+            + str(compare) + "=" + str(x*y*compare))
+            return(retval)
+            break
+        else:
+            continue
+
+
+# Function to compare first two entires to remaining list and
+# check if it adds to 2020
+# I think the logic here needs to be 1 + 2 + 3, 1 + 2 + 4, 1 + 2 + 5
+# then move on to 1 + 3 + 4, 1 + 3 + 5 etc.
+
+def find_expenses3(df, amount):
+    n_lines = len(df)   # get the number of entries to parse
+
+    # loop through the indexes adding each other one and
+    # checking if it adds to user specified amount
+    for starting in range(n_lines):
+        for second in range(n_lines-1):
+            startval = int(df.iloc[starting])
+            secondval = int(df.iloc[second + 1])
+            other_vals = df.iloc[second+2:n_lines].values.tolist()
+
+            final = add_compare3(startval, secondval, other_vals, amount)
+
+    return(final)
+
+find_expenses3(exp_df,2020)
