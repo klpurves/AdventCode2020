@@ -10,8 +10,8 @@ import re
 import os
 
 # site example
-ex_arr = ['1-3 a: abcde', '1-3 b: cdefg',
-          '2-9 c: ccccccccc']
+ex_arr = ['1-3 a: abcde', '1-3 b: bdfg',
+          '2-9 c: ccccccccd']
 
 # real input
 workdir = os.getcwd()
@@ -96,9 +96,14 @@ def sled_password(stringin):
 
         index = list(map(reindex, index))  # fix zero indexing
 
-        ## note to self for tomorrow: just need to make sure its at one but not both index points now. using upend and lowend
+        if len(index) > 1:
+            continue
+        elif lowend in index or upend in index:
+            sledcount += 1
+        else:
+            continue
 
-
+    return(sledcount)
 
 
 sled_password(ex_arr)
