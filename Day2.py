@@ -7,14 +7,24 @@
 
 import pandas as pd
 import re
+import os
 
+# site example
 ex_arr = ['1-3 a: abcde', '1-3 b: cdefg',
           '2-9 c: ccccccccc']
+
+
+# real input
+workdir = os.getcwd()
+input = pd.read_csv("{0}/day2input.csv".format(workdir), header=None)
+
+input_arr = input[0].tolist()
 
 # strategy: Create a function to parse the string
 # and gather the rule components into a set of
 # variables and the password into another.
 # use rule variables to test the password
+# keep a count of valid passwords
 
 # define count variable to keep track of number of valid passwords
 
@@ -45,4 +55,6 @@ def parse_password(stringin):
             continue
     return(passcount)
 
-parse_password(ex_arr)
+# apply to real data
+
+parse_password(input_arr)
