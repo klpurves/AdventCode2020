@@ -22,25 +22,27 @@ passcount = 0
 
 def parse_password(stringin):
 
-    global passcount # make count variable global
+    global passcount  # make count variable global
 
-    for pass in stringin:
+    for item in stringin:
 
-        #get first number (lower limit) (ID digit before -)
-        lowend = int(re.search(r'(?<!-)\d+', stringin).group())
+        # get first number (lower limit) (ID digit before -)
+        lowend = int(re.search(r'(?<!-)\d+', item).group())
         # get a number after a - (upper limit)
-        upend = int(re.search(r'(?<=-)\d+', stringin).group())
+        upend = int(re.search(r'(?<=-)\d+', item).group())
         # get the necessary letter ( 1 0r 0 letter, a-z, looking back from :)
-        reqlet = re.search(r'(?<!:)[a-z]', stringin).group()
+        reqlet = re.search(r'(?<!:)[a-z]', item).group()
 
         # get password characters, strip whitespace, make it a list
-        password =  list(re.search(r'(?<=:)\D+', stringin).group().lstrip())
+        password = list(re.search(r'(?<=:)\D+', item).group().lstrip())
 
         # get count of required letter in password
         reqcount = password.count(reqlet)
 
-        if reqcount >= lowend & reqcount <= upend:
+        if reqcount >= lowend and reqcount <= upend:
             passcount += 1
-            print(passcount)
         else:
             continue
+    return(passcount)
+
+parse_password(ex_arr)
