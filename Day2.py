@@ -10,7 +10,7 @@ import re
 import os
 
 # site example
-ex_arr = ['1-3 a: abcde', '1-3 b: bdfg',
+ex_arr = ['1-3 a: ebcde', '1-3 b: ebfgb',
           '2-9 c: ccccccccd']
 
 # real input
@@ -63,7 +63,7 @@ parse_password(input_arr)
 
 # PART TWO
 # more complex rule set
-# strategy: return required letter indexes isntead of count
+# strategy: return required letter indexes instead of count
 
 # add one to avoid zero indexing issue Function
 
@@ -90,13 +90,13 @@ def sled_password(stringin):
         # get password characters, strip whitespace, make it a list
         password = re.search(r'(?<=:)\D+', item).group().lstrip()
 
-        # get indexes of reqauired letter matches
+        # get indexes of required letter matches
         index = [i for i, letter in enumerate(password)
                  if re.search(reqlet, letter)]
 
         index = list(map(reindex, index))  # fix zero indexing
 
-        if len(index) > 1:
+        if lowend in index and upend in index:
             continue
         elif lowend in index or upend in index:
             sledcount += 1
@@ -106,4 +106,4 @@ def sled_password(stringin):
     return(sledcount)
 
 
-sled_password(ex_arr)
+sled_password(input_arr)
