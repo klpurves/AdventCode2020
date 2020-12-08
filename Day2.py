@@ -13,7 +13,6 @@ import os
 ex_arr = ['1-3 a: abcde', '1-3 b: cdefg',
           '2-9 c: ccccccccc']
 
-
 # real input
 workdir = os.getcwd()
 input = pd.read_csv("{0}/day2input.csv".format(workdir), header=None)
@@ -29,6 +28,7 @@ input_arr = input[0].tolist()
 # define count variable to keep track of number of valid passwords
 
 passcount = 0
+
 
 def parse_password(stringin):
 
@@ -55,6 +55,50 @@ def parse_password(stringin):
             continue
     return(passcount)
 
+
 # apply to real data
 
 parse_password(input_arr)
+
+
+# PART TWO
+# more complex rule set
+# strategy: return required letter indexes isntead of count
+
+# add one to avoid zero indexing issue Function
+
+def reindex(i):
+    return(i+1)
+
+
+sledcount = 0
+
+
+def sled_password(stringin):
+
+    global sledcount  # make count variable global
+
+    for item in stringin:
+
+        # get first number (lower limit) (ID digit before -)
+        lowend = int(re.search(r'(?<!-)\d+', item).group())
+        # get a number after a - (upper limit)
+        upend = int(re.search(r'(?<=-)\d+', item).group())
+        # get the necessary letter ( 1 0r 0 letter, a-z, looking back from :)
+        reqlet = re.search(r'(?<!:)[a-z]', item).group()
+
+        # get password characters, strip whitespace, make it a list
+        password = re.search(r'(?<=:)\D+', item).group().lstrip()
+
+        # get indexes of reqauired letter matches
+        index = [i for i, letter in enumerate(password)
+                 if re.search(reqlet, letter)]
+
+        index = list(map(reindex, index))  # fix zero indexing
+
+        ## note to self for tomorrow: just need to make sure its at one but not both index points now. using upend and lowend
+
+
+
+
+sled_password(ex_arr)
